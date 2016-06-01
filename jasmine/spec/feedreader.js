@@ -115,6 +115,13 @@ $(function() {
          */
 
         beforeEach(function(done) {
+            // Ensure that allFeeds is defined and not empty
+            /*
+            TODO - this test is redundant with 'RSS Feeds are defined',
+            but without it, the this spec is dependant on that spec...
+            */
+            expect(allFeeds).toBeDefined();
+            expect(allFeeds.length).not.toEqual(0);
             // Load initial news feed
             loadFeed(0, function() {
                 // Signal termination of beforeEach
@@ -144,6 +151,13 @@ $(function() {
             updated;
 
         beforeEach(function(done) {
+            // Ensure that allFeeds is defined and has multiple entries
+            /*
+            TODO - this test is semi redundant with 'RSS Feeds are defined',
+            but without it, the this spec is partially dependant on that spec...
+            */
+            expect(allFeeds).toBeDefined();
+            expect(allFeeds.length).toBeGreaterThan(1);
             // Load initial news feed
             loadFeed(0, function() {
                 // Signal termination of beforeEach
