@@ -81,23 +81,15 @@ $(function() {
           it('visibility is toggled on click', function() {
             // Cache menu icon and hidden state of menu
             var menuIcon = $('.menu-icon-link');
-            var initialState,
-                middleState,
-                finalState;
-            // Get initial hidden state
-            initialState = $('body').hasClass('menu-hidden');
-            // Trigger change
+            var isHidden;
+            // Trigger and check hidden state
             menuIcon.trigger('click');
-            // Get middle state
-            middleState = $('body').hasClass('menu-hidden');
-            // Compate middle state and initial state
-            expect(middleState).not.toEqual(initialState);
-            // Trigger change
+            isHidden = $('body').hasClass('menu-hidden');
+            expect(isHidden).toBeFalsy();
+            // Trigger and check hidden state
             menuIcon.trigger('click');
-            // Get final state
-            finalState = $('body').hasClass('menu-hidden');
-            // Compare final state and initial state
-            expect(finalState).toEqual(initialState);
+            isHidden = $('body').hasClass('menu-hidden');
+            expect(isHidden).toBeTruthy();
           });
 
 
