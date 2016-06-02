@@ -9,5 +9,7 @@ The main goal of the project was to become more familiar with testing, test-driv
 
 To run the project, open the [hosted application here]. Once it's loaded, you can scroll to the bottom of the page to see Jasmine's results.
 
+Alternatively, open index.html in your browser.
+
 
 [hosted application here]:<http://davidscales.github.io/FEND-feedreader/>
