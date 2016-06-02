@@ -12,7 +12,7 @@ $(function() {
     /* Ensure that there are RSS feeds in the allFeeds variable,
      * and that they contain the necessary data.
      */
-    describe('RSS Feeds', function() {
+    xdescribe('RSS Feeds', function() {
 
         /* Ensure that the allFeeds variable has been defined
          * and that it is not empty.
@@ -50,7 +50,7 @@ $(function() {
     /* Ensure that the menu is hidden by default, and that its
      * visibility toggling functions as intended.
      */
-    describe('The Menu', function() {
+    xdescribe('The Menu', function() {
 
         /* Ensure the menu element is hidden by default.
          */
@@ -81,16 +81,13 @@ $(function() {
 
     /* Ensure that the initial feed is loaded and contains entries.
      */
-    describe('Initial Entries', function() {
+    xdescribe('Initial Entries', function() {
 
         /* Ensure that when the loadFeed function is called and completes
          * its work, there is at least a single .entry element within the
          * .feed container.
          */
         beforeEach(function(done) {
-            // Ensure that allFeeds is defined and not empty
-            expect(allFeeds).toBeDefined();
-            expect(allFeeds.length).not.toEqual(0);
             // Load initial news feed
             loadFeed(0, done);
         });
@@ -115,9 +112,6 @@ $(function() {
             updated;
 
         beforeEach(function(done) {
-            // Ensure that allFeeds is defined and has multiple entries
-            expect(allFeeds).toBeDefined();
-            expect(allFeeds.length).toBeGreaterThan(1);
             // Load initial news feed
             loadFeed(0, function() {
                 // Cache initial news feed html
@@ -127,6 +121,8 @@ $(function() {
         });
 
         it('updates content', function(done){
+            // Ensure there are multiple feeds
+            expect(allFeeds.length).toBeGreaterThan(1);
             // Update news feed
             loadFeed(1, function() {
                 // Cache updated news feed html
