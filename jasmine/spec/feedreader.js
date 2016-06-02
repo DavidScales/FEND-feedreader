@@ -129,11 +129,9 @@ $(function() {
             });
         });
 
-        it('contains at least one .entry element', function(done) {
+        it('contains at least one .entry element', function() {
             var feed = $('.feed');
             expect( feed.find('.entry').length ).not.toBe(0);
-            // Signal termination of spec
-            done();
          });
 
     });
@@ -159,29 +157,21 @@ $(function() {
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).toBeGreaterThan(1);
             // Load initial news feed
-            loadFeed(0, function() {
-                // Signal termination of beforeEach
-                done();
-            });
+            loadFeed(0, done);
         });
 
         beforeEach(function(done) {
             // Cache initial news feed html
             loaded = $('.feed').html();
             // Update to next news feed
-            loadFeed(1, function() {
-                // Signal termination of beforeEach
-                done();
-            });
+            loadFeed(1, done);
         });
 
-        it('updates content', function(done){
+        it('updates content', function(){
             // Cache updated news feed html
             updated = $('.feed').html();
             // Compare initial and updated news feed hmtl
             expect(updated).not.toEqual(loaded);
-            // Signal termination of spec
-            done();
         });
 
     });
