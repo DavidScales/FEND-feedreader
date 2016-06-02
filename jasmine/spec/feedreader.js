@@ -115,15 +115,12 @@ $(function() {
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toEqual(0);
             // Load initial news feed
-            loadFeed(0, function() {
-                // Signal termination of beforeEach
-                done();
-            });
+            loadFeed(0, done);
         });
 
         it('contains at least one .entry element', function() {
-            var feed = $('.feed');
-            expect( feed.find('.entry').length ).not.toBe(0);
+            var feed = $('.feed .entry');
+            expect(feed.length).toBeGreaterThan(0);
          });
 
     });
