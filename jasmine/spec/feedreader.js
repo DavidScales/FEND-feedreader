@@ -145,22 +145,23 @@ $(function() {
             */
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).toBeGreaterThan(1);
+
             // Load initial news feed
-            loadFeed(0, done);
+            loadFeed(0, function() {
+                // Cache initial news feed html
+                loaded = $('.feed').html();
+                done();
+            });
         });
 
-        beforeEach(function(done) {
-            // Cache initial news feed html
-            loaded = $('.feed').html();
-            // Update to next news feed
-            loadFeed(1, done);
-        });
-
-        it('updates content', function(){
-            // Cache updated news feed html
-            updated = $('.feed').html();
-            // Compare initial and updated news feed hmtl
-            expect(updated).not.toEqual(loaded);
+        it('updates content', function(done){
+            loadFeed(1, function() {
+                // Cache updated news feed html
+                updated = $('.feed').html();
+                // Compare initial and updated news feed hmtl
+                expect(updated).not.toEqual(loaded);
+                done();
+            });
         });
 
     });
