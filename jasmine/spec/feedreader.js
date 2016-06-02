@@ -12,14 +12,14 @@ $(function() {
     /* Ensure that there are RSS feeds in the allFeeds variable,
      * and that they contain the necessary data.
      */
-    xdescribe('RSS Feeds', function() {
+    describe('RSS Feeds', function() {
 
         /* Ensure that the allFeeds variable has been defined
          * and that it is not empty.
          */
         it('are defined', function() {
             expect(allFeeds).toBeDefined();
-            expect(allFeeds.length).not.toBe(0);
+            expect(allFeeds.length).toBeGreaterThan(0);
         });
 
         /* Loop through each feed the allFeeds object and
@@ -28,8 +28,7 @@ $(function() {
          */
         it('contain url\'s', function() {
             allFeeds.forEach(function(feed) {
-                expect(feed.url).toBeDefined();
-                expect(feed.url.length).not.toBe(0);
+                expect(feed.url).toBeTruthy();
             });
         });
 
@@ -39,8 +38,7 @@ $(function() {
          */
         it('contain names', function() {
             allFeeds.forEach(function(feed) {
-                expect(feed.name).toBeDefined();
-                expect(feed.name.length).not.toBe(0);
+                expect(feed.name).toBeTruthy();
             });
         });
 
@@ -50,7 +48,7 @@ $(function() {
     /* Ensure that the menu is hidden by default, and that its
      * visibility toggling functions as intended.
      */
-    xdescribe('The Menu', function() {
+    describe('The Menu', function() {
 
         /* Ensure the menu element is hidden by default.
          */
@@ -81,7 +79,7 @@ $(function() {
 
     /* Ensure that the initial feed is loaded and contains entries.
      */
-    xdescribe('Initial Entries', function() {
+    describe('Initial Entries', function() {
 
         /* Ensure that when the loadFeed function is called and completes
          * its work, there is at least a single .entry element within the
@@ -111,25 +109,22 @@ $(function() {
         var loaded,
             updated;
 
-        beforeEach(function(done) {
+        it('updates content', function(done){
+            // Ensure there are multiple feeds
+            expect(allFeeds.length).toBeGreaterThan(1);
+
             // Load initial news feed
             loadFeed(0, function() {
                 // Cache initial news feed html
                 loaded = $('.feed').html();
-                done();
-            });
-        });
-
-        it('updates content', function(done){
-            // Ensure there are multiple feeds
-            expect(allFeeds.length).toBeGreaterThan(1);
-            // Update news feed
-            loadFeed(1, function() {
-                // Cache updated news feed html
-                updated = $('.feed').html();
-                // Compare initial and updated news feed hmtl
-                expect(updated).not.toEqual(loaded);
-                done();
+                // Update news feed
+                loadFeed(1, function() {
+                    // Cache updated news feed html
+                    updated = $('.feed').html();
+                    // Compare initial and updated news feed hmtl
+                    expect(updated).not.toEqual(loaded);
+                    done();
+                });
             });
         });
 
